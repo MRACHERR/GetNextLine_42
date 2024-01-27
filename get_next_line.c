@@ -1,42 +1,42 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-char *ft_read_str(fd, first_string)
+char    *string_read_from_fd(int fd, char *first_str)
 {
-    int     b_read;
+    int b_read;
     char    *buffer;
-
-    buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+    
+    buffer = malloc(1 + BUFFER_SIZE * sizeof(char));
     if (!buffer)
         return (NULL);
     b_read = 1;
-    while (b_read != 0 , !ft_strchr(first_string,'\n'))
+    while (b_read != 0 && !ft_strchr(buffer, '\n'))
     {
-        b_read = read(fd, buffer,BUFFER_SIZE);
+        b_read = read(fd , buffer, BUFFER_SIZE);
         if (b_read == -1)
         {
-            free(b_read);
+            free(buffer);
             return (NULL);
         }
-        buffer[b_read]= '\0';
-        first_string = ft_strjoin(first_string, buffer);
+        buffer[b_read] = '\0';
+        first_str = ft_strjoin(first_str, buffer);
     }
     free(buffer);
-    return (first_string);
-
+    return (first_str); 
 }
 
-char *get_next_line(int fd)
+
+
+char    *get_next_line(int fd)
 {
     char    *line;
-    char    *first_str;
+    static char    *first_str;
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-    first_str = calloc((BUFFER_SIZE + 1) , sizeof(char));
+    first_str = string_read_from_fd(fd, first_str);
     if (!first_str)
         return (NULL);
-    line = ft_read_str(fd, first_str);
-    //first_str += line;
-    
+    line = buff_to_line(first_str);
+    first_str = next_line_from_buffer(first_str);
     return (line);
 }
