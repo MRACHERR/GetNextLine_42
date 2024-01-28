@@ -40,50 +40,21 @@ char	*ft_strjoin(char *left_str, char *buff)
 	return (str);
 }
 
-void    *ft_calloc(size_t nitems, size_t size)
+char	*ft_strchr(char *s, int c)
 {
-        void    *items;
-        size_t  t;
+	int	i;
 
-        t = nitems * size;
-        if (size != 0 && nitems != t / size)
-                return (NULL);
-        items = malloc(t);
-        if (items == 0)
-                return (NULL);
-        ft_bzero(items, (nitems * size));
-        return (items);
-}
-
-void    ft_bzero(void *str, size_t len)
-{
-        size_t                  i;
-        unsigned char   *ptr;
-
-        i = 0;
-        ptr = (unsigned char *)str;
-        while (i < len)
-        {
-                ptr[i] = 0;
-                i++;
-        }
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	char	find;
-	int		i;
-
-	find = (char)c;
 	i = 0;
+	if (!s)
+		return (0);
+	if (c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
 	while (s[i] != '\0')
 	{
-		if (s[i] == find)
-			return ((char *)s + i);
+		if (s[i] == (char) c)
+			return ((char *)&s[i]);
 		i++;
 	}
-	if (s[i] == find)
-		return ((char *)s + i);
 	return (0);
 }
 
@@ -113,25 +84,27 @@ char	*buff_to_line(char *buff)
 {
 	char	*line;
 	int i;
-	int	j;
 
 	i = 0;
 	if (!buff[i])
 		return (NULL);
 	while (buff[i] && buff[i] != '\n')
 		i++;
-	line = malloc((2 + i) * sizeof(char));
+	line = (char *)malloc((2 + i) * sizeof(char));
 	if (!line)
 		return (NULL);
-	j = 0;
-	while( j < i)
+	i = 0;
+	while( buff[i] && buff[i] != '\n')
 	{
-		line[j] = buff[j];
-		j++;
+		line[i] = buff[i];
+		i++;
 	}
-	if (buff[j] == '\n')
-		line[j] = buff[j];
-	line[j] = '\0';
+	if (buff[i] == '\n')
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
 	return (line);
 }
 
@@ -149,7 +122,7 @@ char	*next_line_from_buffer(char *buff)
 		free(buff);
 		return (NULL);
 	}
-	str = malloc((ft_strlen(buff) - i + 1) * sizeof(char));
+	str = (char *)malloc((ft_strlen(buff) - i + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i++;

@@ -1,16 +1,18 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "get_next_line.h"
+
 
 char    *string_read_from_fd(int fd, char *first_str)
 {
     int b_read;
     char    *buffer;
     
-    buffer = malloc(1 + BUFFER_SIZE * sizeof(char));
+    buffer = malloc((1 + BUFFER_SIZE) * sizeof(char));
     if (!buffer)
         return (NULL);
     b_read = 1;
-    while (b_read != 0 && !ft_strchr(buffer, '\n'))
+    while (b_read != 0 && !ft_strchr(first_str, '\n'))
     {
         b_read = read(fd , buffer, BUFFER_SIZE);
         if (b_read == -1)
