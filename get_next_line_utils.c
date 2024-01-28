@@ -36,8 +36,7 @@ char	*ft_strjoin(char *left_str, char *buff)
 	while (buff[j] != '\0')
 		str[i++] = buff[j++];
 	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
-	free(left_str);
-	return (str);
+	return (free (left_str), left_str = NULL, str);
 }
 
 char	*ft_strchr(char *s, int c)
@@ -105,6 +104,8 @@ char	*buff_to_line(char *buff)
 		i++;
 	}
 	line[i] = '\0';
+	// if (!*line)
+	// 	return (free(line),line = NULL,NULL);	
 	return (line);
 }
 
@@ -131,5 +132,7 @@ char	*next_line_from_buffer(char *buff)
 		str[j++] = buff[i++];
 	str[j] = '\0';
 	free(buff);
+	if (!*str)
+		return (free(str),str = NULL,NULL);
 	return (str);
 }
