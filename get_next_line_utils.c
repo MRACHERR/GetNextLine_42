@@ -26,7 +26,7 @@ char	*ft_strjoin(char *left_str, char *buff)
 	if (!left_str || !buff)
 		return (NULL);
 	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	i = -1;
 	j = 0;
@@ -89,11 +89,14 @@ char	*buff_to_line(char *buff)
 		return (NULL);
 	while (buff[i] && buff[i] != '\n')
 		i++;
-	line = (char *)malloc((2 + i) * sizeof(char));
+	if( buff[i] != '\n')
+		line = (char *)malloc((1 + i) * sizeof(char));
+	else 
+		line = (char *)malloc((2 + i) * sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
-	while( buff[i] && buff[i] != '\n')
+	while(buff[i] && buff[i] != '\n')
 	{
 		line[i] = buff[i];
 		i++;

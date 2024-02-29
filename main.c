@@ -9,17 +9,20 @@ void f()
 }
 int main()
 {
-    atexit(f);// 0x7fe576c05850
+    //atexit(f);// 0x7fe576c05850
     int fd;
     char *line;
     // int count;
     // char *buffer;
     // int b_read;
 
-    fd = open("get_next_line.h", O_RDONLY);
+    fd = open("test.txt", O_RDONLY);
     line = get_next_line(fd);
     printf("%s", line);
-    close(fd);
+    line = get_next_line(fd);
+
+    printf("%s", line);
+    //close(fd);
     // buffer = malloc(5 + 1 * sizeof(char));
     // b_read = 1;
     // while (b_read != 0 && !ft_strchr(buffer, '\0'))

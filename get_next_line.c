@@ -24,7 +24,6 @@ char    *string_read_from_fd(int fd, char *first_str)
         }
         buffer[b_read] = '\0';
         first_str = ft_strjoin(first_str, buffer);
-
     }
     free(buffer);
     return (first_str); 
@@ -43,8 +42,8 @@ char    *get_next_line(int fd)
     first_str = string_read_from_fd(fd, first_str);
     if (!first_str)
         return (NULL);
-    if (!*first_str)
-        return(free(first_str),first_str = NULL, NULL);
+    // if (!*first_str)
+    //     return(free(first_str),first_str = NULL, NULL);
     line = buff_to_line(first_str);
     first_str = next_line_from_buffer(first_str);
     return (line);
