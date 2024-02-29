@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acherraq <acherraq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 19:11:23 by acherraq          #+#    #+#             */
-/*   Updated: 2024/02/29 19:18:52 by acherraq         ###   ########.fr       */
+/*   Updated: 2024/02/29 20:15:53 by acherraq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ char	*string_read_from_fd(int fd, char *first_str)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*first_str;
+	static char	*first_str[4096];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		return (NULL);
 	}
-	first_str = string_read_from_fd(fd, first_str);
-	if (!first_str)
+	first_str[fd] = string_read_from_fd(fd, first_str[fd]);
+	if (!first_str[fd])
 		return (NULL);
-	line = buff_to_line(first_str);
-	first_str = next_line_from_buffer(first_str);
+	line = buff_to_line(first_str[fd]);
+	first_str[fd] = next_line_from_buffer(first_str[fd]);
 	return (line);
 }
