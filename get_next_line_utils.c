@@ -6,7 +6,7 @@
 /*   By: acherraq <acherraq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:32:31 by acherraq          #+#    #+#             */
-/*   Updated: 2024/03/01 13:27:35 by acherraq         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:08:03 by acherraq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_strjoin(char *left_str, char *buff)
 	if (!left_str)
 	{
 		left_str = (char *)malloc(1 * sizeof(char));
+		if (!left_str)
+			return (NULL);
 		left_str[0] = '\0';
 	}
 	if (!left_str || !buff)
