@@ -6,7 +6,7 @@
 /*   By: acherraq <acherraq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:32:31 by acherraq          #+#    #+#             */
-/*   Updated: 2024/02/29 19:11:04 by acherraq         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:27:35 by acherraq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ char	*ft_strjoin(char *left_str, char *buff)
 		return (NULL);
 	i = -1;
 	j = 0;
-	if (left_str)
-		while (left_str[++i] != '\0')
-			str[i] = left_str[i];
+	while (left_str[++i] != '\0')
+		str[i] = left_str[i];
 	while (buff[j] != '\0')
 		str[i++] = buff[j++];
 	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';

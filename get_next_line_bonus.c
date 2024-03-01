@@ -6,11 +6,11 @@
 /*   By: acherraq <acherraq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 19:11:23 by acherraq          #+#    #+#             */
-/*   Updated: 2024/02/29 20:15:53 by acherraq         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:34:50 by acherraq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*string_read_from_fd(int fd, char *first_str)
 {
@@ -20,6 +20,8 @@ char	*string_read_from_fd(int fd, char *first_str)
 	buffer = malloc((1 + BUFFER_SIZE) * sizeof(char));
 	if (!buffer)
 		return (NULL);
+	if (fd > OPEN_MAX)
+		return (free(buffer), buffer = NULL, NULL);
 	b_read = 1;
 	while (b_read != 0 && !ft_strchr(first_str, '\n'))
 	{
@@ -41,7 +43,7 @@ char	*string_read_from_fd(int fd, char *first_str)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*first_str[4096];
+	static char	*first_str[10240];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{

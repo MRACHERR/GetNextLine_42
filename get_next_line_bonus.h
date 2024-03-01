@@ -6,7 +6,7 @@
 /*   By: acherraq <acherraq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 13:07:55 by acherraq          #+#    #+#             */
-/*   Updated: 2024/02/29 20:25:10 by acherraq         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:09:46 by acherraq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 char	*get_next_line(int fd);
 void	ft_bzero(void *str, size_t len);
