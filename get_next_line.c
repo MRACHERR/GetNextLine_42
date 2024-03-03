@@ -6,7 +6,7 @@
 /*   By: acherraq <acherraq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 19:11:23 by acherraq          #+#    #+#             */
-/*   Updated: 2024/02/29 19:18:52 by acherraq         ###   ########.fr       */
+/*   Updated: 2024/03/03 10:41:01 by acherraq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*string_read_from_fd(int fd, char *first_str)
 	int		b_read;
 	char	*buffer;
 
-	buffer = malloc((1 + BUFFER_SIZE) * sizeof(char));
+	buffer = malloc((1 + (size_t)BUFFER_SIZE) * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	b_read = 1;
