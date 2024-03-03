@@ -6,7 +6,7 @@
 /*   By: acherraq <acherraq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 19:11:23 by acherraq          #+#    #+#             */
-/*   Updated: 2024/03/03 10:41:27 by acherraq         ###   ########.fr       */
+/*   Updated: 2024/03/03 10:47:17 by acherraq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ char	*string_read_from_fd(int fd, char *first_str)
 	buffer = malloc((1 + (size_t)BUFFER_SIZE) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	if (fd > OPEN_MAX)
-		return (free(buffer), buffer = NULL, NULL);
 	b_read = 1;
 	while (b_read != 0 && !ft_strchr(first_str, '\n'))
 	{
@@ -43,12 +41,12 @@ char	*string_read_from_fd(int fd, char *first_str)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*first_str[10240];
+	static char	*first_str[OPEN_MAX + 1];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
 		return (NULL);
-	}
+	if (fd > OPEN_MAX)
+		return (NULL);
 	first_str[fd] = string_read_from_fd(fd, first_str[fd]);
 	if (!first_str[fd])
 		return (NULL);
